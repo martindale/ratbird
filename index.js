@@ -12,8 +12,10 @@ module.exports.createNotifier = function(config) {
 
 module.exports.createDispatchStream = function(config) {
   if (!config.preferencesPath) {
-    throw new Error('');
+    throw new Error('Cannot create astream without `preferencePath`');
   }
+
+  var notifier = new Notifier(config);
 
   return through(function(activity) {
     var prefs = blindfold(activity, config.preferencesPath);
